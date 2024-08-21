@@ -16,7 +16,6 @@ export default function App() {
       ...data,
       [name]: type === 'checkbox' ? checked : value,
     });
-    console.log(type === 'checkbox' ? checked : value);
   };
 
   const handleSubmit = (e) => {
