@@ -1,25 +1,111 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+import './style.css';
+export default function App() {
+  const [data, setData] = useState({
+    email: '',
+    firstName: '',
+    lastName: '',
+    birthDate: '',
+    gender: '',
+    terms: false,
+  });
 
-function App() {
+  const handleChange = (e) => {
+    const { name, type, value, checked } = e.target;
+    setData({
+      ...data,
+      [name]: type === 'checkbox' ? checked : value,
+    });
+    console.log(type === 'checkbox' ? checked : value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert('Data: ' + JSON.stringify(data, null, 2));
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="form">
+      <h1>Registration Form</h1>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Email:
+          <input
+            type="email"
+            name="email"
+            value={data.email}
+            onChange={handleChange}
+            required
+          />
+        </label>
+        <br />
+        <label>
+          First Name:
+          <input
+            type="text"
+            name="firstName"
+            value={data.firstName}
+            onChange={handleChange}
+            required
+          />
+        </label>
+        <br />
+        <label>
+          Last Name:
+          <input
+            type="text"
+            name="lastName"
+            value={data.lastName}
+            onChange={handleChange}
+            required
+          />
+        </label>
+        <br />
+        <label>
+          Birth Date:
+          <input
+            type="date"
+            name="birthDate"
+            value={data.birthDate}
+            onChange={handleChange}
+            required
+          />
+        </label>
+        <br />
+        <label>Gender: </label>
+          <label>
+            <input
+              type="radio"
+              name="gender"
+              value="Male"
+              checked={data.gender === 'Male'}
+              onChange={handleChange}
+            />
+            Male
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="gender"
+              value="Female"
+              checked={data.gender === 'Female'}
+              onChange={handleChange}
+            />
+            Female
+          </label>
+
+        <label>
+          <input
+            type="checkbox"
+            name="terms"
+            checked={data.terms}
+            onChange={handleChange}
+          />
+          I accept the terms and conditions
+        </label>
+        <br />
+        <button type="submit" disabled={!data.terms}>Submit</button>
+      </form>
     </div>
   );
 }
-
-export default App;
