@@ -1,13 +1,15 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import DatePicker from 'react-date-picker';
-import 'react-datepicker/dist/react-datepicker.css';
+import 'react-date-picker/dist/DatePicker.css';
+import 'react-calendar/dist/Calendar.css';
 import './style.css';
+
 export default function App() {
   const [data, setData] = useState({
     email: '',
     firstName: '',
     lastName: '',
-    birthDate: '',
+    birthDate: null,
     gender: '',
     terms: false,
   });
@@ -17,6 +19,13 @@ export default function App() {
     setData({
       ...data,
       [name]: type === 'checkbox' ? checked : value,
+    });
+  };
+
+  const handleDateChange = (date) => {
+    setData({
+      ...data,
+      birthDate: date,
     });
   };
 
@@ -36,41 +45,49 @@ export default function App() {
             name="email"
             value={data.email}
             onChange={handleChange}
+            placeholder="Enter your email"
             required
           />
         </label>
         <br />
-        <label>
-          First Name:
-          <input
-            type="text"
-            name="firstName"
-            value={data.firstName}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <br />
-        <label>
-          Last Name:
-          <input
-            type="text"
-            name="lastName"
-            value={data.lastName}
-            onChange={handleChange}
-            required
-          />
-        </label>
+        <div className='group'>
+          <label>
+            First Name:
+            <input
+              type="text"
+              name="firstName"
+              value={data.firstName}
+              onChange={handleChange}
+              placeholder="Enter your first name"
+              required
+            />
+          </label>
+          <br />
+          <label>
+            Last Name:
+            <input
+              type="text"
+              name="lastName"
+              value={data.lastName}
+              onChange={handleChange}
+              placeholder="Enter your last name"
+              required
+            />
+          </label>
+        </div>
         <br />
         <label>
           Birth Date:
-          <DatePicker selected={data.birthDate}
-            onChange={handleChange}
-            dateFormat="yyyy/MM/dd"
-            required />
+          <DatePicker
+            onChange={handleDateChange}
+            value={data.birthDate}
+            placeholder="Select your birth date"
+            required
+          />
         </label>
         <br />
-        <label>Gender: </label>
+        <div className="group">
+          <label>Gender: </label>
           <label>
             <input
               type="radio"
@@ -91,7 +108,8 @@ export default function App() {
             />
             Female
           </label>
-
+        </div>
+        <br />
         <label>
           <input
             type="checkbox"
@@ -102,7 +120,9 @@ export default function App() {
           I accept the terms and conditions
         </label>
         <br />
-        <button type="submit" disabled={!data.terms}>Submit</button>
+        <button type="submit" disabled={!data.terms}>
+          Submit
+        </button>
       </form>
     </div>
   );
