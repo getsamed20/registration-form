@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import DatePicker from 'react-date-picker';
+import 'react-datepicker/dist/react-datepicker.css';
 import './style.css';
 export default function App() {
   const [data, setData] = useState({
@@ -63,7 +64,10 @@ export default function App() {
         <br />
         <label>
           Birth Date:
-   
+          <DatePicker selected={data.birthDate}
+            onChange={handleChange}
+            dateFormat="yyyy/MM/dd"
+            required />
         </label>
         <br />
         <label>Gender: </label>
