@@ -4,7 +4,7 @@ import 'react-date-picker/dist/DatePicker.css';
 import 'react-calendar/dist/Calendar.css';
 import './style.css';
 
-export default function App() {
+export default function SignUp({ onNavigate }) {
   const [data, setData] = useState({
     email: '',
     firstName: '',
@@ -13,6 +13,7 @@ export default function App() {
     gender: '',
     terms: false,
   });
+  const [errorMsg, setErrorMsg] = useState('');
 
   const handleChange = (e) => {
     const { name, type, value, checked } = e.target;
@@ -31,6 +32,15 @@ export default function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const today = new Date();
+    const minAgeDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+
+    if (data.birthDate > minAgeDate) {
+      setErrorMsg('You must be at least 18 years old to register.');
+      return;
+    }
+
+    setErrorMsg('');
     alert('Data: ' + JSON.stringify(data, null, 2));
   };
 
@@ -50,7 +60,7 @@ export default function App() {
           />
         </label>
         <br />
-        <div className='group'>
+        <div className="group">
           <label>
             First Name:
             <input
@@ -84,6 +94,7 @@ export default function App() {
             placeholder="Select your birth date"
             required
           />
+          <span className="errorMsg">{errorMsg}</span>
         </label>
         <br />
         <div className="group">
@@ -123,6 +134,9 @@ export default function App() {
         <button type="submit" disabled={!data.terms}>
           Submit
         </button>
+        <p onClick={() => onNavigate('login')} style={{ cursor: 'pointer', color: '#286fb4' }}>
+          Already have an account? Log in
+        </p>
       </form>
     </div>
   );

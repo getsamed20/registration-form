@@ -18,6 +18,7 @@ h1 {
   font-size: 24px;
   color: #333;
 }
+.errorMsg{color: red; display: block; margin-top: 5px; font-size: 12px; }
 
 label {
   margin-bottom: 8px;
@@ -25,7 +26,8 @@ label {
 }
 
 form input[type="text"],
-input[type="email"],.react-date-picker {
+input[type="email"],
+input[type="password"],.react-date-picker {
   border: 1.5px solid #c0c0c0;
   border-radius: 4px;
   padding: 10px;
