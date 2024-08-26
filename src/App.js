@@ -3,8 +3,10 @@ import DatePicker from 'react-date-picker';
 import 'react-date-picker/dist/DatePicker.css';
 import 'react-calendar/dist/Calendar.css';
 import './style.css';
+import { Link } from "react-router-dom";
 
-export default function SignUp({ onNavigate }) {
+
+export default function SignUp() {
   const [data, setData] = useState({
     email: '',
     firstName: '',
@@ -134,9 +136,9 @@ export default function SignUp({ onNavigate }) {
         <button type="submit" disabled={!data.terms}>
           Submit
         </button>
-        <p onClick={() => onNavigate('login')} style={{ cursor: 'pointer', color: '#286fb4' }}>
-          Already have an account? Log in
-        </p>
+
+        <Link to="/logIn" style={{ cursor: 'pointer', color: '#286fb4' }}>Already have an account? Log in</Link>
+
       </form>
     </div>
   );

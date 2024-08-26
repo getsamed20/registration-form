@@ -1,20 +1,13 @@
-import React, { useState } from 'react';
-import LogIn from './logIn'; 
-import SignUp from './App';  
-export default function Root() {
-  const [currentView, setCurrentView] = useState('login'); 
-
-  const handleNavigate = (view) => {
-    setCurrentView(view);
-  };
-
+import Signup from './App.js'
+import Login from './logIn.js'
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+export default function App(){
   return (
-    <div>
-      {currentView === 'login' ? (
-        <LogIn onNavigate={handleNavigate} />
-      ) : (
-        <SignUp onNavigate={handleNavigate} />
-      )}
-    </div>
-  );
+      <BrowserRouter>
+      <Routes>
+        <Route path="/" element={ <Signup/> } />
+        <Route path="logIn" element={ <Login/> } />
+      </Routes>
+      </BrowserRouter>
+  )
 }

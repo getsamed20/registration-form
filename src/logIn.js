@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import './style.css';
+import { Link } from "react-router-dom";
 
-export default function LogIn({ onNavigate }) {
+
+export default function LogIn() {
   const [data, setData] = useState({
     email: '',
     password: '',
@@ -51,9 +53,7 @@ export default function LogIn({ onNavigate }) {
         <br />
         <button type="submit">Submit</button>
       </form>
-      <p onClick={() => onNavigate('register')} style={{ cursor: 'pointer', color: '#286fb4' }}>
-        Don't have an account? Register
-      </p>
+      <Link to="/" style={{ cursor: 'pointer', color: '#286fb4' }}>Don't have an account? Register</Link>
     </div>
   );
 }
